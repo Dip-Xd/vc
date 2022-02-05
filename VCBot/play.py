@@ -9,7 +9,7 @@ from pyrogram.types import Message
 from pytgcalls import StreamType
 from pytgcalls.types.input_stream import AudioPiped
 from youtubesearchpython import VideosSearch
-
+from pytgcalls.types.input_stream.quality import HighQualityAudio
 
 def ytsearch(query):
    try:

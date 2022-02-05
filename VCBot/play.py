@@ -107,6 +107,7 @@ async def play(client, m: Message):
                            chat_id,
                            AudioPiped(
                               ytlink,
+                              HighQualityAudio(),
                            ),
                            stream_type=StreamType().pulse_stream,
                         )
@@ -140,6 +141,7 @@ async def play(client, m: Message):
                            chat_id,
                            AudioPiped(
                               ytlink,
+                              HighQualityAudio(),
                            ),
                            stream_type=StreamType().pulse_stream,
                         )

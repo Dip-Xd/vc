@@ -4,7 +4,7 @@ import asyncio
 from pyrogram import Client
 from VCBot.queues import QUEUE, add_to_queue
 from config import bot, call_py, HNDLR, contact_filter, GRPPLAY
-from pyrogram import filters
+from pyrogram import *
 from pyrogram.types import Message
 from pytgcalls import StreamType
 from pytgcalls.types.input_stream import AudioPiped
@@ -44,7 +44,21 @@ async def ytdl(link):
       return 1, stdout.decode().split('\n')[0]
    else:
       return 0, stderr.decode()
+   
+   
+btn = InlineKeyboardMarkup(
+            [
+                [
+                     InlineKeyboardButton(
+                        text="Watch on YouTube", url=f"{link}"
+                    
+                    )
+                ]
+            ]
+        )
 
+       
+                        
 
 @Client.on_message(filters.command(['play'], prefixes=f"{HNDLR}"))
 async def play(client, m: Message):
@@ -79,7 +93,7 @@ async def play(client, m: Message):
                stream_type=StreamType().pulse_stream,
             )
             add_to_queue(chat_id, songname, dl, link, "Audio", 0)
-            await huehue.edit(f"**Started Playing Audio ▶** \n**🎧 SONG** : [{songname}]({link}) \n**💬 CHAT** : `{chat_id}`", disable_web_page_preview=True)
+            await huehue.edit(f"**Started Playing Audio ▶** \n**🎧 SONG** : [{songname}]({link}) \n**💬 CHAT** : `{chat_id}`",reply_markup=btn, disable_web_page_preview=True)
           except Exception as hmme:
             await huehue.edit(hmme)
       else:

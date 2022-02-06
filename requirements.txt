@@ -6,3 +6,4 @@ youtube-search-python==1.4.6
 https://github.com/lanegramling/youtube-dl/archive/refs/heads/fix-function-sig-parser.zip
 python-dotenv
 yt-dlp==2021.11.10.1
+tswift

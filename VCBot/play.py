@@ -46,18 +46,7 @@ async def ytdl(link):
       return 0, stderr.decode()
    
    
-btn = InlineKeyboardMarkup(
-            [
-                [
-                     InlineKeyboardButton(
-                        text="Watch on YouTube", url=f"{link}"
-                    
-                    )
-                ]
-            ]
-        )
 
-       
                         
 
 @Client.on_message(filters.command(['play'], prefixes=f"{HNDLR}"))
@@ -89,11 +78,12 @@ async def play(client, m: Message):
                chat_id,
                AudioPiped(
                   dl,
+                  HighQualityAudio(),
                ),
-               stream_type=StreamType().pulse_stream,
+               stream_type=StreamType().local_stream,
             )
             add_to_queue(chat_id, songname, dl, link, "Audio", 0)
-            await huehue.edit(f"**Started Playing Audio ▶** \n**🎧 SONG** : [{songname}]({link}) \n**💬 CHAT** : `{chat_id}`",reply_markup=btn, disable_web_page_preview=True)
+            await huehue.edit(f"**Started Playing Audio ▶** \n**🎧 SONG** : [{songname}]({link}) \n**💬 CHAT** : `{chat_id}`",disable_web_page_preview=True)
           except Exception as hmme:
             await huehue.edit(hmme)
       else:
@@ -157,7 +147,7 @@ async def play(client, m: Message):
                               ytlink,
                               HighQualityAudio(),
                            ),
-                           stream_type=StreamType().pulse_stream,
+                           stream_type=StreamType().local_stream,
                         )
                         add_to_queue(chat_id, songname, ytlink, url, "Audio", 0)
                         await huehue.edit(f"**Started Playing Audio ▶** \n**🎧 SONG** : [{songname}]({url}) \n**💬 CHAT** : `{chat_id}`", disable_web_page_preview=True)
@@ -195,8 +185,9 @@ async def stream(client, m: Message):
                   chat_id,
                   AudioPiped(
                      livelink,
+                     HighQualityAudio(),
                   ),
-                  stream_type=StreamType().pulse_stream,
+                  stream_type=StreamType().local_stream,
                )
                add_to_queue(chat_id, "Radio 📻", livelink, link, "Audio", 0)
                await huehue.edit(f"Started Playing **[Radio 📻]({link})** in `{chat_id}`", disable_web_page_preview=True)
